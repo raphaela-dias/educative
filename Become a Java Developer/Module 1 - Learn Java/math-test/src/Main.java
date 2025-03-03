@@ -11,19 +11,25 @@ public class Main {
         System.out.println("What is %d %s %d?".formatted(num1, op, num2));
     }
 
-    public static void answerFeedback(int userAnswer, int correctAnswer){
-        System.out.println("Your answer is: %d\nThe correct answer is: %d".formatted(userAnswer, correctAnswer));
+    public static int answerFeedback(int userAnswer, int correctAnswer, int score){
+        if (userAnswer == correctAnswer){
+            score += 1;
+            System.out.println("Your answer was correct.\nYour score now is %d".formatted(score));
+        }else{
+            System.out.println("Your answer was incorrect.\nYour score now is %d".formatted(score));
+        }
+        return score;
     }
 
-    public static void printResult(String userName){
-        System.out.println("Thanks for taking the quiz, %s.\nYou will get your result soon.".formatted(userName));
+    public static void printResult(String userName, int score){
+        System.out.println("Thanks for taking the quiz, %s.\nYour final score is %d.".formatted(userName, score));
     }
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         Random random = new Random();
-        int num1, num2, userAnswer, correctAnswer;
+        int num1, num2, userAnswer, correctAnswer, score = 0;
         String userName, op, question, farewellMessage;
 
         System.out.print("Please enter your name: ");
@@ -37,7 +43,7 @@ public class Main {
         printQuestion(num1, num2, op);
         userAnswer = scan.nextInt();
         correctAnswer = num1 - num2;
-        answerFeedback(userAnswer, correctAnswer);
+        score = answerFeedback(userAnswer, correctAnswer, score);
 
         num1 = random.nextInt(10) + 1;
         num2 = random.nextInt(10) + 1;
@@ -45,7 +51,7 @@ public class Main {
         printQuestion(num1, num2, op);
         userAnswer = scan.nextInt();
         correctAnswer = num1 + num2;
-        answerFeedback(userAnswer, correctAnswer);
+        score = answerFeedback(userAnswer, correctAnswer, score);
 
         num1 = random.nextInt(10) + 1;
         num2 = random.nextInt(10) + 1;
@@ -53,7 +59,7 @@ public class Main {
         printQuestion(num1, num2, op);
         userAnswer = scan.nextInt();
         correctAnswer = num1 * num2;
-        answerFeedback(userAnswer, correctAnswer);
+        score = answerFeedback(userAnswer, correctAnswer, score);
 
         num1 = random.nextInt(10) + 1;
         num2 = random.nextInt(10) + 1;
@@ -61,9 +67,9 @@ public class Main {
         printQuestion(num1, num2, op);
         userAnswer = scan.nextInt();
         correctAnswer = num1 / num2;
-        answerFeedback(userAnswer, correctAnswer);
+        score = answerFeedback(userAnswer, correctAnswer, score);
 
-        printResult(userName);
+        printResult(userName, score);
 
     }
 }
